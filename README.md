@@ -1,4 +1,6 @@
 # LÖVE CRT Effect
+![http://i.imgur.com/Tar0T4L.png](http://i.imgur.com/Tar0T4L.png)
+
 A CRT simulation done in LÖVE 0.9.2.  
 The code is kinda sloppy, but I figured I might as well share it for those who are interested.
 
