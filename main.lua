@@ -1,4 +1,7 @@
 function love.load()
+	-- load in effect module (processes shader and handles motion blur)
+	effect = require('effect')
+
 	-- set display mode
 	love.window.setMode(768, 720)
 	love.window.setTitle("CRT Effect Demonstration")
@@ -6,9 +9,8 @@ function love.load()
 	-- set default filter
 	love.graphics.setDefaultFilter("nearest", "nearest")
 
-	-- create canvas for shader
-	canvas = love.graphics.newCanvas()
-	canvas:setFilter("linear", "linear")
+	-- initialize canvas
+    effect.init()
 
 	-- load assets
 	shader = love.graphics.newShader("resources/shader.glsl")
@@ -24,47 +26,39 @@ function love.load()
 
 	shadowmask = love.graphics.newImage("resources/shadowmask.png")
 	shadowmask:setWrap("repeat", "repeat")
-	shadowmask:setFilter("linear", "linear")
 	shadowmaskQuad = love.graphics.newQuad(0, 0, getDisplayWidth(), getDisplayHeight(), 12, 6)
 
 	test = love.graphics.newImage("testing/contra.png")
 end
 
 function love.draw()
-	love.graphics.setCanvas(canvas)
+	effect.preDraw()
 
-	-- game
+	-- game code goes here
 	love.graphics.push()
 	love.graphics.scale(3)
-	love.graphics.draw(test, 0, 0, 0, (getWidth()/test:getWidth()), (getHeight()/test:getHeight()))
-
+	love.graphics.draw(test, 0, 0, 0, (getWidth() / test:getWidth()), (getHeight() / test:getHeight()))
+	
 	-- ntsc artifacts
 	love.graphics.scale(3)
-	love.graphics.setColor(255, 255, 255, 24)
-	love.graphics.draw(ntsc, ntscQuad, 0,0, 0, 1,1)
+	love.graphics.setColor(255, 255, 255, 32)
+	love.graphics.draw(ntsc, ntscQuad, 0, 0, 0, 1, 1)
 	love.graphics.pop()
 
 	-- shadow mask
 	love.graphics.push()
 	love.graphics.scale(1)
-	love.graphics.setColor(255, 255, 255, 32)
-	love.graphics.draw(shadowmask, shadowmaskQuad, 0,0, 0, 1,1)
+	love.graphics.setColor(255, 255, 255, 64)
+	love.graphics.setBlendMode("additive")
+	love.graphics.draw(shadowmask, shadowmaskQuad, 0, 0, 0, 1, 1)
+	love.graphics.setBlendMode("alpha")
 	love.graphics.pop()
 
+	-- draw canvas w/ shader
 	love.graphics.push()
 	love.graphics.scale(1)
-
-	-- reset color
 	love.graphics.setColor(255, 255, 255, 255)
-
-	-- draw canvas
-	local offs = 24
-	love.graphics.setCanvas()
-	love.graphics.setShader(shader)
-	love.graphics.draw(canvas, (offs/2)*getScale(), (offs/2)*3, 0, ((getWidth()-offs)*getScale()) / love.graphics.getWidth(), ((getHeight()-offs)*getScale()) / love.graphics.getHeight())
-	love.graphics.setShader()
-
-	love.graphics.draw(overlay, ((offs-12)/2)*getScale(), ((offs-12)/2)*getScale(), 0, ((getWidth()-(offs-12))*getScale()) / love.graphics.getWidth(), ((getHeight()-(offs-12))*getScale()) / love.graphics.getHeight())
+	effect.postDraw(24)
 	love.graphics.pop()
 end
 

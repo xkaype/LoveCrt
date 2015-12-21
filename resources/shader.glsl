@@ -1,4 +1,4 @@
-#define CRT_CURVE 0.4    // how curved the image will be
+#define CRT_CURVE 0.4    // the amount of curvature
 #define CRT_LINES 1500.0 // the amount of scanlines
 
 // disclaimer: this is using löve's version of GLSL
