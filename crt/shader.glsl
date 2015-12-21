@@ -29,7 +29,7 @@ vec4 effect(vec4 colour, Image tex, vec2 tc, vec2 sc)
   vec4 finalFringeRight = vec4(0);
 
   for (number i = 0; i < 2; i++) {
-    edgeFringeLeft = vec2(i, 0) * 0.006;
+    edgeFringeLeft = vec2(i, 0) * 0.007;
     finalFringeLeft = -Texel(tex, tc + edgeFringeLeft);
     edgeFringeRight = vec2(-i, 0) * 0.003;
     finalFringeRight = Texel(tex, tc + edgeFringeRight);

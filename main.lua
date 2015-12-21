@@ -22,6 +22,7 @@ function love.load()
 
 	ntsc = love.graphics.newImage("crt/ntsc.png")
 	ntsc:setWrap("repeat", "repeat")
+	ntsc:setFilter("linear", "linear")
 	ntscQuad = love.graphics.newQuad(0, 0, 768 / 3, 720 / 3, 3, 3)
 
 	shadowmask = love.graphics.newImage("crt/shadowmask.png")
@@ -29,7 +30,7 @@ function love.load()
 	shadowmask:setFilter("linear", "linear")
 	shadowmaskQuad = love.graphics.newQuad(0, 0, 768, 720, 12, 6)
 
-	test = love.graphics.newImage("test_images/smb.png")
+	test = love.graphics.newImage("test_images/contra.png")
 end
 
 function love.draw()
@@ -39,15 +40,11 @@ function love.draw()
 	love.graphics.push()
 	love.graphics.scale(3)
 	love.graphics.draw(test, 0, 0, 0, (256/test:getWidth()), (240/test:getHeight()))
-	love.graphics.pop()
 
 	-- ntsc artifacts
-	love.graphics.push()
 	love.graphics.scale(3)
-	love.graphics.setColor(255, 255, 255, 16)
-	love.graphics.setBlendMode("additive")
+	love.graphics.setColor(255, 255, 255, 24)
 	love.graphics.draw(ntsc, ntscQuad, 0,0, 0, 1,1)
-	love.graphics.setBlendMode("alpha")
 	love.graphics.pop()
 
 	-- shadow mask
