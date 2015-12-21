@@ -10,7 +10,7 @@ function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest")
 
 	-- initialize canvas
-    effect.init()
+	effect.init()
 
 	-- load assets
 	shader = love.graphics.newShader("resources/shader.glsl")
