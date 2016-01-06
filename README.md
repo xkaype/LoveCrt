@@ -11,7 +11,7 @@ Features:
  - NTSC Artifacts + Shadow Mask Overlay
  - Included Bezel/Light Overlay
 
-Note: You'll have to recreate the overlay to fit which aspect ratio you want.
+Note: You'll have to recreate the overlay to fit which aspect ratio you want. I recommend using 3x scaling.
 
 (Roughly) adapted from Kyle Pittman's CRT simulation:  
 http://gamasutra.com/blogs/KylePittman/20150420/241442/CRT_Simulation_in_Super_Win_the_Game.php
