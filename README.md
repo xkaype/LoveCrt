@@ -1,5 +1,5 @@
 # LÖVE CRT Effect
-![https://www.kaype.co/img/crt.png](https://www.kaype.co/img/crt.png)
+![http://www.kaype.co/img/crt.png](http://www.kaype.co/img/crt.png)
 
 A CRT simulation done in LÖVE 0.9.2.  
 The code is a bit sloppy, but I figured I might as well share it for the people interested.
